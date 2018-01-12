@@ -13,9 +13,18 @@ import {
 
 //child component
 class Item extends Component {
+  constructor() {
+    super();
+    this.state = { deleted: false }
+  }
+  handleDelete = () => {
+    this.setState({ deleted: !this.state.deleted })
+  }
   render() {
     return (
-      <Text>{this.props.name}</Text>
+      <Text onPress={this.handleDelete} style={{textDecorationLine: this.state.deleted ? 'line-through' : 'none'}}>
+        {this.props.name}
+      </Text>
     )
   }
 }
