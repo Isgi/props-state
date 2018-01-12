@@ -1,4 +1,4 @@
 import { AppRegistry } from 'react-native';
-import App from './App';
+import List from './List';
 
-AppRegistry.registerComponent('PropsState', () => App);
+AppRegistry.registerComponent('PropsState', () => List);
