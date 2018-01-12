@@ -8,17 +8,22 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
-  View
+  View,
+  Button
 } from 'react-native';
 
 //child component
 class Item extends Component {
   constructor() {
     super();
-    this.state = { deleted: false }
+    this.state = {
+      deleted: false,
+      deleteProcess: false
+    }
   }
   handleDelete = () => {
-    this.setState({ deleted: !this.state.deleted })
+    setTimeout(()=>this.setState({deleteProcess: true}), 3000)
+    this.setState({ deleted: !this.state.deleted });
   }
   render() {
     return (
@@ -31,14 +36,30 @@ class Item extends Component {
 
 //parent component
 export default class List extends Component {
+  constructor() {
+    super();
+    this.state = {
+      pageList: true
+    }
+  }
+  handleChangeRoute = () => {
+    this.setState({pageList: !this.state.pageList})
+  }
   render() {
     return (
       <View style={styles.container}>
-        <Item name='1. JavaScript' />
-        <Item name='2. Java' />
-        <Item name='3. PHP' />
-        <Item name='4. C++' />
-        <Item name='5. C#' />
+        {this.state.pageList ? (
+          <View>
+            <Item name='1. JavaScript' />
+            <Item name='2. Java' />
+            <Item name='3. PHP' />
+            <Item name='4. C++' />
+            <Item name='5. C#' />
+          </View>
+        ) : (
+          <Text>Welcome Page</Text>
+        )}
+        <Button onPress={()=>this.handleChangeRoute()} title='Change Route'/>
       </View>
     );
   }
